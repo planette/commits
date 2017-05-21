@@ -1,0 +1,20 @@
+search:
+	in: %appDir%
+	exclude:
+		classes:
+			- App\Bootstrap
+			- App\RouterFactory
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+services:
+	router: App\RouterFactory::createRouter

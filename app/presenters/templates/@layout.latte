@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+
+		<title>{ifset title}{include title |stripHtml|trim} | {/ifset}nette commits</title>
+		<meta name="author" content="kesspess">
+	</head>
+
+	<body>
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+		{block content /}
+	</body>
+</html>

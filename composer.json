@@ -1,0 +1,37 @@
+{
+	"type": "project",
+	"authors": [
+		{
+			"name": "Petr Kessler",
+			"email": "kesspess@gmail.com",
+			"homepage": "https://kesspess.cz",
+			"role": "Developer"
+		}
+	],
+	"license": ["MIT"],
+	"require": {
+		"php": ">= 7.4",
+		"nette/application": "^3.1",
+		"nette/bootstrap": "^3.1",
+		"nette/caching": "^3.1",
+		"nette/database": "^3.1",
+		"nette/di": "^3.0",
+		"nette/finder": "^2.5",
+		"nette/forms": "^3.1",
+		"nette/http": "^3.1",
+		"nette/mail": "^3.1",
+		"nette/robot-loader": "^3.4",
+		"nette/security": "^3.1",
+		"nette/utils": "^3.2",
+		"latte/latte": "^2.10",
+		"tracy/tracy": "^2.8"
+	},
+	"autoload": {
+		"classmap": ["app/Bootstrap.php"]
+	},
+	"autoload-dev": {
+		"files": [
+			"app/functions.php"
+		]
+	}
+}
