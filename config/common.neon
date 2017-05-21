@@ -3,6 +3,7 @@ search:
 	exclude:
 		classes:
 			- App\Bootstrap
+			- App\Entity\**
 			- App\Router\RouterFactory
 
 
