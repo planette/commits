@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App;
+namespace App\Router;
 
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;

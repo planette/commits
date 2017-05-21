@@ -16,10 +16,10 @@ class Bootstrap
 		$configurator = new Configurator;
 
 		$configurator->setDebugMode(PHP_SAPI === 'cli' ? true : []);
-		$configurator->enableTracy($appDir . '/log');
+		$configurator->enableTracy($appDir . '/var/log');
 
 		$configurator->setTimeZone('Europe/Prague');
-		$configurator->setTempDirectory($appDir . '/temp');
+		$configurator->setTempDirectory($appDir . '/var/temp');
 
 		$configurator->createRobotLoader()
 			->addDirectory(__DIR__)

@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Presenters;
+namespace App\Presenter;
 
 use Tracy\ILogger;
 use Nette\Application\Request;
