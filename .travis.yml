@@ -16,6 +16,7 @@ install: composer install --no-interaction --prefer-source
 before_script:
     - mysql -u root -e 'CREATE DATABASE test;'
     - php bin/console orm:schema-tool:create
+    - php bin/console dbal:import fixtures.sql
 
 script: composer tester
 
