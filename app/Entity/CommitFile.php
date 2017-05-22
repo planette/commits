@@ -4,17 +4,43 @@ declare(strict_types = 1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+
+/** @ORM\Entity */
 class CommitFile
 {
 
+	/**
+	 * @ORM\Id
+	 * @ORM\Column(type = "string")
+	 */
 	private string $id;
+
+	/**
+	 * @ORM\ManyToOne(targetEntity = "Commit", inversedBy = "files")
+	 * @ORM\JoinColumns({
+	 *     @ORM\JoinColumn(name = "commit_repository", referencedColumnName = "repository", nullable = false, onDelete = "CASCADE"),
+	 *     @ORM\JoinColumn(name = "commit_sha", referencedColumnName = "sha", nullable = false, onDelete = "CASCADE")
+	 * })
+	 */
 	private Commit $commit;
+
+	/** @ORM\Column(type = "string") */
 	private string $filename;
+
+	/** @ORM\Column(type = "string") */
 	private string $status;
+
+	/** @ORM\Column(type = "integer") */
 	private int $additions;
+
+	/** @ORM\Column(type = "integer") */
 	private int $deletions;
+
+	/** @ORM\Column(type = "integer") */
 	private int $changes;
+
 
 	private const STATUS_ADDED = 'added';
 	private const STATUS_MODIFIED = 'modified';

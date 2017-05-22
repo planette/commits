@@ -7,6 +7,7 @@ extensions:
 	annotations: Nettrine\Annotations\DI\AnnotationsExtension
 
 	orm: Nettrine\ORM\DI\OrmExtension
+	orm.annotations: Nettrine\ORM\DI\OrmAnnotationsExtension
 	orm.console: Nettrine\ORM\DI\OrmConsoleExtension
 
 
@@ -33,6 +34,11 @@ dbal:
 		password: %database.password%
 		dbname: %database.dbname%
 		charset: utf8mb4
+
+
+orm.annotations:
+	mapping:
+		App\Entity: %appDir%/Entity
 
 
 application:

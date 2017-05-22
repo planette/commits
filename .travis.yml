@@ -13,6 +13,10 @@ before_install: mv tests/local.travis.neon config/local.neon
 
 install: composer install --no-interaction --prefer-source
 
+before_script:
+    - mysql -u root -e 'CREATE DATABASE test;'
+    - php bin/console orm:schema-tool:create
+
 script: composer tester
 
 after_failure:
@@ -24,12 +28,14 @@ jobs:
             name: PHP Lint
             php: 7.4
             before_install: ~
+            before_script: ~
             script: composer phplint
             after_failure: ~
 
         -   stage: Code Checks
             name: Static Analysis
             php: 7.4
+            before_script: ~
             script: composer phpstan
             after_failure: ~
 
@@ -37,6 +43,7 @@ jobs:
             name: Code Checker
             php: 7.4
             before_install: ~
+            before_script: ~
             script: composer code-checker
             after_failure: ~
 
@@ -44,5 +51,13 @@ jobs:
             name: Coding Standards
             php: 7.4
             before_install: ~
+            before_script: ~
             script: composer coding-standards
+            after_failure: ~
+
+        -   stage: Code Checks
+            name: Entity Annotations Validation
+            php: 7.4
+            before_script: ~
+            script: composer schema
             after_failure: ~
