@@ -57,3 +57,8 @@ services:
 
 	doctrine.dbal.resultCache:
 		factory: Doctrine\Common\Cache\FilesystemCache( %tempDir%/cache/doctrine )
+
+	-
+		factory: Milo\Github\Api
+		setup:
+			- setToken( Milo\Github\OAuth\Token( %githubAPI.token% ) )

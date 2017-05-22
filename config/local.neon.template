@@ -6,3 +6,6 @@ parameters:
 		user:
 		password:
 		dbname:
+
+	githubAPI:
+		token:
