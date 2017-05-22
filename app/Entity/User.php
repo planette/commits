@@ -7,7 +7,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 
-/** @ORM\Entity */
+/** @ORM\Entity(repositoryClass = "App\Repository\UserRepository") */
 class User
 {
 
@@ -32,6 +32,13 @@ class User
 		$this->login = $login;
 		$this->id = ID::generate();
 		$this->githubID = $githubID;
+		$this->avatarURL = $avatarURL;
+	}
+
+
+	public function merge(string $login, ?string $avatarURL): void
+	{
+		$this->login = $login;
 		$this->avatarURL = $avatarURL;
 	}
 

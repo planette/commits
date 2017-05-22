@@ -14,6 +14,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  *
  * @ORM\Table(indexes = {
  *     @ORM\Index(columns = {"committed_at"}),
+ *     @ORM\Index(columns = {"sort"}),
  * })
  */
 class Commit
@@ -68,6 +69,9 @@ class Commit
 	/** @ORM\Column(type = "integer") */
 	private int $total;
 
+	/** @ORM\Column(type = "integer") */
+	private int $sort;
+
 	/**
 	 * @ORM\OneToMany(targetEntity = "CommitFile", mappedBy = "commit", cascade = {"persist"})
 	 * @ORM\OrderBy({"filename" = "ASC"})
@@ -88,7 +92,8 @@ class Commit
 		string $message,
 		int $additions,
 		int $deletions,
-		int $total
+		int $total,
+		int $sort = 0
 
 	) {
 		$this->sha = $sha;
@@ -111,6 +116,8 @@ class Commit
 		$this->additions = $additions;
 		$this->committer = $committer;
 		$this->deletions = $deletions;
+
+		$this->sort = $sort;
 
 		$this->files = new ArrayCollection;
 	}

@@ -29,10 +29,14 @@ class Project
 	 */
 	private Collection $repositories;
 
+	/** @ORM\Column(type = "integer") */
+	private int $sort;
 
-	public function __construct(string $name)
+
+	public function __construct(string $name, int $sort = 0)
 	{
 		$this->name = $name;
+		$this->sort = $sort;
 		$this->id = ID::generate();
 		$this->repositories = new ArrayCollection;
 	}
