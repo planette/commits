@@ -6,6 +6,7 @@ namespace App\Synchronization;
 
 use App\Entity\User;
 use App\Facade\User\UserPersister;
+use App\Entity\Synchronization\RepositoryLog;
 use App\QueryFunction\User\UsersIndexedByGithubIdQuery;
 
 
@@ -26,7 +27,7 @@ final class UserSynchronizer
 	}
 
 
-	public function synchronize(int $githubID, string $login, ?string $avatarURL): User
+	public function synchronize(RepositoryLog $repositoryLog, int $githubID, string $login, ?string $avatarURL): User
 	{
 		if ($this->users === null) {
 			$this->users = $this->usersQuery->get();
@@ -38,6 +39,7 @@ final class UserSynchronizer
 
 		} else {
 			$local = new User($githubID, $login, $avatarURL);
+			$repositoryLog->newUser();
 		}
 
 		$this->userPersister->persistWithoutFlush($local);

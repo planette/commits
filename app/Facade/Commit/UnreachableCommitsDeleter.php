@@ -21,13 +21,13 @@ final class UnreachableCommitsDeleter
 
 
 	/** @param  string[] $allSHAs */
-	public function delete(Repository $repository, array $allSHAs): void
+	public function delete(Repository $repository, array $allSHAs): int
 	{
 		if (count($allSHAs) === 0) {
-			return ;
+			return 0;
 		}
 
-		$this->connection->executeStatement('
+		return $this->connection->executeStatement('
 			DELETE FROM `commit`
 			WHERE repository = :repository
 				AND sha NOT IN (:shas)

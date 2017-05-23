@@ -21,16 +21,21 @@ final class RepositoriesSortedByProjectAndNameQuery
 
 
 	/** @return Repository[] */
-	public function get(): array
+	public function get(?string $name): array
 	{
-		return $this->em->createQueryBuilder()
+		$qb = $this->em->createQueryBuilder()
 			->select('r')
 			->from(Repository::class, 'r')
 			->join('r.project', 'p')
 			->addOrderBy('p.sort', 'ASC')
-			->addOrderBy('r.name', 'ASC')
-			->getQuery()
-			->getResult();
+			->addOrderBy('r.name', 'ASC');
+
+		if ($name !== null) {
+			$qb->andWhere('r.name = :name')
+				->setParameter('name', $name);
+		}
+
+		return $qb->getQuery()->getResult();
 	}
 
 }

@@ -27,7 +27,8 @@
 		"tracy/tracy": "^2.8",
 		"contributte/console": "^0.9",
 		"nettrine/orm": "^0.8",
-		"milo/github-api": "^1.4"
+		"milo/github-api": "^1.4",
+		"symfony/lock": "^5.2"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
