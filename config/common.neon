@@ -17,8 +17,9 @@ search:
 		classes:
 			- App\Bootstrap
 			- App\Entity\**
+			- App\Control\**
+			- App\**\*Template
 			- App\Router\RouterFactory
-			- App\View\DefaultTemplate
 
 
 console:
@@ -54,7 +55,7 @@ session:
 
 
 services:
-	router: App\Router\RouterFactory::createRouter
+	router: App\Router\RouterFactory()::createRouter
 
 	doctrine.dbal.resultCache:
 		factory: Doctrine\Common\Cache\FilesystemCache( %tempDir%/cache/doctrine )
@@ -69,3 +70,5 @@ services:
 	- Symfony\Component\Lock\LockFactory( Symfony\Component\Lock\Store\FlockStore( %tempDir%/flocks ) )::createLock('commits-synchronization')
 
 	- App\Helper\FileMtimeHelper( %wwwDir% )
+
+	- implement: App\Control\Navigation\NavigationControlFactory

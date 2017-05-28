@@ -1,12 +1,12 @@
 
 -- nette commits - initial data
 
-INSERT IGNORE INTO `project` (`id`, `name`, `sort`) VALUES
-('b82r4gf7',	'Framework',	1),
-('xbgtp7ww',	'Documentation',	2),
-('xnjpn0du',	'Promo',	3),
-('6qbku3rw',	'Tools',	4),
-('955svzgv',	'Tester',	5);
+INSERT IGNORE INTO `project` (`id`, `name`, `slug`, `sort`) VALUES
+('b82r4gf7',	'Framework',	'framework',	1),
+('xbgtp7ww',	'Documentation',	'docs',	2),
+('xnjpn0du',	'Promo',	'promo',	3),
+('6qbku3rw',	'Tools',	'tools',	4),
+('955svzgv',	'Tester',	'tester',	5);
 
 
 INSERT IGNORE INTO `repository` (`id`, `name`, `project_id`) VALUES

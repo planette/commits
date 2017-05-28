@@ -1,0 +1,18 @@
+{templateType App\Control\Navigation\NavigationTemplate}
+
+<div class="collapse navbar-collapse" id="main-navbar">
+	<ul class="nav navbar-nav">
+		<li n:class="$presenter->isLinkCurrent('Project:commits', [ projectSlug => $project->getSlug() ]) ? active" n:foreach="$projects as $project">
+			<a href="{plink Project:commits, projectSlug => $project->getSlug()}">{$project->getName()}</a>
+		</li>
+	</ul>
+
+	<ul class="nav navbar-nav navbar-right">
+		<li>
+			<a href="https://github.com/contributte/commits-site">
+				<i class="fab fa-fw fa-github"></i>
+				GitHub
+			</a>
+		</li>
+	</ul>
+</div>

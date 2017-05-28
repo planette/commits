@@ -9,7 +9,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 
-/** @ORM\Entity */
+/**
+ * @ORM\Entity
+ * @ORM\Table(indexes = {
+ *     @ORM\Index(columns = {"sort"}),
+ * })
+ */
 class Project
 {
 
@@ -22,6 +27,9 @@ class Project
 	/** @ORM\Column(type = "string", unique = true) */
 	private string $name;
 
+	/** @ORM\Column(type = "string", unique = true) */
+	private string $slug;
+
 	/**
 	 * @ORM\OneToMany(targetEntity = "Repository", mappedBy = "project")
 	 * @ORM\OrderBy({"name" = "ASC"})
@@ -33,12 +41,25 @@ class Project
 	private int $sort;
 
 
-	public function __construct(string $name, int $sort = 0)
+	public function __construct(string $name, string $slug, int $sort = 0)
 	{
 		$this->name = $name;
+		$this->slug = $slug;
 		$this->sort = $sort;
 		$this->id = ID::generate();
 		$this->repositories = new ArrayCollection;
+	}
+
+
+	public function getName(): string
+	{
+		return $this->name;
+	}
+
+
+	public function getSlug(): string
+	{
+		return $this->slug;
 	}
 
 

@@ -14,6 +14,9 @@ use Nette\Bridges\ApplicationLatte\Template;
 final class Error4xxPresenter extends Presenter
 {
 
+	use TPortalPresenter;
+
+
 	public function startup(): void
 	{
 		parent::startup();

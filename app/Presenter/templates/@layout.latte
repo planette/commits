@@ -7,9 +7,27 @@
 		<meta name="viewport" content="width=device-width">
 		<link rel="shortcut icon" href="{$basePath}/{='favicon.ico' |mtime}">
 		<link rel="stylesheet" href="{$basePath}/{='assets/vendor/bootstrap/dist/css/bootstrap.min.css' |mtime}">
+		<link rel="stylesheet" href="{$basePath}/{='assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' |mtime}">
+		<link rel="stylesheet" href="{$basePath}/{='assets/style.css' |mtime}">
 	</head>
 
 	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<h1><a class="navbar-brand" n:href="Project:commits, projectSlug => framework">nette commits</a></h1>
+				</div>
+
+{block |indent:4}{control navigation}{/block}
+			</div>
+		</nav>
+
 		<p n:foreach="$flashes as $flash" n:class="alert, 'alert-' . ($flash->type === error ? danger : $flash->type)">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			{$flash->message}
