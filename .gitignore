@@ -1,3 +1,5 @@
 /vendor
+/yarn.lock
 /composer.lock
 /config/local.neon
+/www/assets/vendor

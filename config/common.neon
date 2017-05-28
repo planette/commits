@@ -18,6 +18,7 @@ search:
 			- App\Bootstrap
 			- App\Entity\**
 			- App\Router\RouterFactory
+			- App\View\DefaultTemplate
 
 
 console:
@@ -58,9 +59,13 @@ services:
 	doctrine.dbal.resultCache:
 		factory: Doctrine\Common\Cache\FilesystemCache( %tempDir%/cache/doctrine )
 
+	latte.templateFactory: App\View\TemplateFactory
+
 	-
 		factory: Milo\Github\Api
 		setup:
 			- setToken( Milo\Github\OAuth\Token( %githubAPI.token% ) )
 
 	- Symfony\Component\Lock\LockFactory( Symfony\Component\Lock\Store\FlockStore( %tempDir%/flocks ) )::createLock('commits-synchronization')
+
+	- App\Helper\FileMtimeHelper( %wwwDir% )

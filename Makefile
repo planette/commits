@@ -4,6 +4,7 @@ install:
 	composer update
 	php bin/console orm:schema-tool:create
 	php bin/console dbal:import fixtures.sql
+	yarn install
 
 ci: phplint phpstan code-checker coding-standards schema tester
 

@@ -2,15 +2,22 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width">
-
-		<title>{ifset title}{include title |stripHtml|trim} | {/ifset}nette commits</title>
 		<meta name="author" content="kesspess">
+		<title>{ifset title}{include title |stripHtml|trim} | {/ifset}nette commits</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="shortcut icon" href="{$basePath}/{='favicon.ico' |mtime}">
+		<link rel="stylesheet" href="{$basePath}/{='assets/vendor/bootstrap/dist/css/bootstrap.min.css' |mtime}">
 	</head>
 
 	<body>
-		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		<p n:foreach="$flashes as $flash" n:class="alert, 'alert-' . ($flash->type === error ? danger : $flash->type)">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			{$flash->message}
+		</p>
 
 		{block content /}
+
+		<script src="{$basePath}/{='assets/vendor/jquery/dist/jquery.min.js' |mtime}"></script>
+		<script src="{$basePath}/{='assets/vendor/bootstrap/dist/js/bootstrap.min.js' |mtime}"></script>
 	</body>
 </html>
