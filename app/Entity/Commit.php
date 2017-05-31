@@ -202,6 +202,19 @@ class Commit
 	}
 
 
+	public function hasMultilineMessage(): bool
+	{
+		return strpos($this->message, "\n") !== false;
+	}
+
+
+	public function getOtherMessageLines(): string
+	{
+		$firstEOL = strpos($this->message, "\n");
+		return $firstEOL === false ? '' : substr($this->message, $firstEOL);
+	}
+
+
 	public function addFile(CommitFile $file): self
 	{
 		if (!$this->files->contains($file)) {

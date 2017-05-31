@@ -59,6 +59,18 @@
 
 {define body-cell-message-content}
 	<a href="{$commit->getURL()}">{$commit->getFirstMessageLine()}</a>
+
+	{if $commit->hasMultilineMessage()}
+		<a href="#commit-message-more-{$commit->getSha() |slice: 0, 7}" class="btn btn-xs btn-default more-btn" data-toggle="collapse">
+			<i class="fa fa-ellipsis-h"></i>
+		</a>
+
+		<div class="collapse" id="commit-message-more-{$commit->getSha() |slice: 0, 7}">
+			<p class="commit-message-rest">
+				{$commit->getOtherMessageLines() |trim|breaklines}
+			</p>
+		</div>
+	{/if}
 {/define}
 
 

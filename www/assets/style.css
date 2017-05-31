@@ -84,6 +84,28 @@ body
 }
 
 
+.more-btn
+{
+	height: 16px;
+	padding: 0 6px;
+	margin-left: 8px;
+	line-height: 15px;
+}
+
+
+.collapsing {
+	transition: none;
+	-webkit-transition: none;
+}
+
+
+.commit-message-rest
+{
+	margin-top: 10px;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+
 .tw-cnt .header-cell-committed_at
 {
 	width: 110px;

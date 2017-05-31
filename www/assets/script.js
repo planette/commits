@@ -1,6 +1,8 @@
 /**!*/
 ;(function (window, $) {
 
+	$.fn.collapse.Constructor.TRANSITION_DURATION = 0;
+
 	$(function () {
 
 		$.nette.ext('clipboard', {
