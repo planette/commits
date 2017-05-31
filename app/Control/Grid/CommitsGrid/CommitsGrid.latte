@@ -1,0 +1,91 @@
+{templateType App\Control\Grid\CommitsGrid\CommitsGridTemplate}
+
+{extends $defaultTemplate}
+
+
+{define container}
+
+	<table class="table table-bordered table-striped table-hover table-condensed">
+		{include #header}
+		{include #body}
+		{include #footer}
+	</table>
+
+{/define}
+
+
+{define filter-button}
+	<button n:name="$button" class="btn btn-default" title="{_$button->caption}">
+		<i n:class="fas, $name === filter ? fa-filter : fa-times"></i>
+	</button>
+{/define}
+
+
+{define body-cell-repository-content}
+	<a href="https://github.com/{$commit->getRepository()->getName()}">{$commit->getRepository()->getBasename()}</a>
+{/define}
+
+
+{define body-cell-author-content}
+	<div class="users">
+		{include #user-avatar, user => $commit->getAuthor(), name => $commit->getAuthorName()}
+
+		<div class="committer" n:if=" $commit->hasCommitter() && $commit->hasDifferentAuthorAndCommitter()">
+			{include #user-avatar, user => $commit->getCommitter(), name => $commit->getCommitterName(), size => 12}
+		</div>
+	</div>
+{/define}
+
+
+{define user-avatar}
+	{default $size = 30}
+	{var $anonAvatar = 'https://i2.wp.com/assets-cdn.github.com/images/gravatars/gravatar-user-420.png?ssl=1'}
+
+	{if $user}
+		<a href="https://github.com/{$user->getLogin()}">
+			{if $user->hasAvatar()}
+				<img src="{$user->getAvatarURL()}&amp;s={ceil(2.33 * $size)}" alt="{$name}" title="{$name}" width="{$size}" height="{$size}">
+
+			{else}
+				<img src="{$anonAvatar}" alt="{$name}" title="{$name}" width="{$size}" height="{$size}">
+			{/if}
+		</a>
+
+	{else}
+		<img src="{$anonAvatar}" alt="{$name}" title="{$name}" width="{$size}" height="{$size}">
+	{/if}
+{/define}
+
+
+{define body-cell-message-content}
+	<a href="{$commit->getURL()}">{$commit->getFirstMessageLine()}</a>
+{/define}
+
+
+{define body-cell-committed_at-content}
+	<time datetime="{$commit->getCommittedAt() |date:'Y-m-d H:i:sP'}" title="{$commit->getCommittedAt() |date:'Y-m-d H:i:s'}">
+		{$commit->getCommittedAt() |timeAgoInWords}
+	</time>
+{/define}
+
+
+{define body-cell-sha-content}
+	<div class="btn-group">
+		<button type="button" data-clipboard-text="{$commit->getSha()}" class="btn btn-sm btn-default" title="Copy the full SHA">
+			<i class="far fa-clipboard"></i>
+		</button>
+
+		<a href="{$commit->getURL()}" class="btn btn-sm btn-default" title="{$commit->getSha()}">
+			<span class="sha">{$commit->getSha() |slice: 0, 7}</span>
+		</a>
+	</div>
+{/define}
+
+
+{define row-action-browse_tree}
+	<a href="https://github.com/{$commit->getRepository()->getName()}/tree/{$commit->getSha()}"
+			class="btn btn-sm btn-default"
+			title="Browse the repository at this point in the history">
+		<i class="fas fa-code"></i>
+	</a>
+{/define}

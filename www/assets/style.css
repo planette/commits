@@ -2,6 +2,123 @@
 body
 {
 	padding-top: 70px;
+	padding-bottom: 140px;
+}
+
+
+.tw-cnt .header-cell,
+.tw-cnt .filter-cell,
+.tw-cnt .body-cell
+{
+	border: 0;
+}
+
+
+.tw-cnt .header > *:last-of-type
+{
+	border-bottom: 1px solid #ddd;
+}
+
+
+.tw-cnt .body-cell
+{
+	padding: 10px 5px;
+	vertical-align: top;
+}
+
+
+.tw-cnt .body-cell-author,
+.tw-cnt .body-cell-sha,
+.tw-cnt .body-cell.row-actions
+{
+	padding: 5px;
+}
+
+
+.tw-cnt .header-cell-repository
+{
+	width: 124px;
+	text-align: right;
+}
+
+
+.tw-cnt .body-cell-repository
+{
+	text-align: right;
+}
+
+
+.tw-cnt .header-cell-author
+{
+	width: 75px;
+	text-align: center;
+}
+
+
+.tw-cnt .body-cell-author
+{
+	text-align: center;
+}
+
+
+.users
+{
+	position: relative;
+	display: inline-block;
+}
+
+
+	.users .committer img
+	{
+		right: -2px;
+		bottom: -2px;
+		position: absolute;
+		box-shadow: -2px -2px 0 rgba(255, 255, 255, 0.8);
+	}
+
+
+.tw-cnt .body-cell-message a
+{
+	color: #000;
+	font-weight: bold;
+}
+
+
+.tw-cnt .header-cell-committed_at
+{
+	width: 110px;
+	text-align: right;
+}
+
+
+.tw-cnt .body-cell-committed_at
+{
+	text-align: right;
+}
+
+
+.tw-cnt .header-cell-sha
+{
+	width: 130px;
+	text-align: center;
+}
+
+
+.tw-cnt .body-cell-sha
+{
+	text-align: center;
+}
+
+
+.sha
+{
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+
+.tw-cnt .body-cell.row-actions
+{
+	text-align: center;
 }
 
 

@@ -63,6 +63,19 @@ class Project
 	}
 
 
+	public function hasMultipleRepositories(): bool
+	{
+		return count($this->repositories) > 1;
+	}
+
+
+	/** @return Repository[] */
+	public function getRepositories(): array
+	{
+		return $this->repositories->toArray();
+	}
+
+
 	public function addRepository(Repository $repository): self
 	{
 		if (!$this->repositories->contains($repository)) {

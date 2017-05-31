@@ -123,6 +123,85 @@ class Commit
 	}
 
 
+	public function getRepository(): Repository
+	{
+		return $this->repository;
+	}
+
+
+	public function getSha(): string
+	{
+		return $this->sha;
+	}
+
+
+	public function hasAuthor(): bool
+	{
+		return $this->author !== null;
+	}
+
+
+	public function getAuthor(): ?User
+	{
+		return $this->author;
+	}
+
+
+	public function getAuthorName(): string
+	{
+		return $this->authorName;
+	}
+
+
+	public function hasCommitter(): bool
+	{
+		return $this->committer !== null;
+	}
+
+
+	public function getCommitter(): ?User
+	{
+		return $this->committer;
+	}
+
+
+	public function getCommitterName(): string
+	{
+		return $this->committerName;
+	}
+
+
+	public function getCommittedAt(): \DateTimeImmutable
+	{
+		return $this->committedAt;
+	}
+
+
+	public function hasDifferentAuthorAndCommitter(): bool
+	{
+		return $this->author !== $this->committer;
+	}
+
+
+	public function getURL(): string
+	{
+		return sprintf('https://github.com/%s/commit/%s', $this->repository->getName(), $this->sha);
+	}
+
+
+	public function getMessage(): string
+	{
+		return $this->message;
+	}
+
+
+	public function getFirstMessageLine(): string
+	{
+		$firstEOL = strpos($this->message, "\n");
+		return $firstEOL === false ? $this->message : substr($this->message, 0, $firstEOL);
+	}
+
+
 	public function addFile(CommitFile $file): self
 	{
 		if (!$this->files->contains($file)) {

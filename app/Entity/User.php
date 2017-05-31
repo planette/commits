@@ -42,4 +42,22 @@ class User
 		$this->avatarURL = $avatarURL;
 	}
 
+
+	public function getLogin(): string
+	{
+		return $this->login;
+	}
+
+
+	public function hasAvatar(): bool
+	{
+		return $this->avatarURL !== null;
+	}
+
+
+	public function getAvatarURL(): ?string
+	{
+		return $this->avatarURL;
+	}
+
 }

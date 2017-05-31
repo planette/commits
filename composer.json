@@ -28,7 +28,8 @@
 		"contributte/console": "^0.9",
 		"nettrine/orm": "^0.8",
 		"milo/github-api": "^1.4",
-		"symfony/lock": "^5.2"
+		"symfony/lock": "^5.2",
+		"uestla/twigrid": "^12.0"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]

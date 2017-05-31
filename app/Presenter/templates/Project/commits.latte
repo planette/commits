@@ -1,4 +1,11 @@
 {templateType App\Presenter\ProjectTemplate}
 
 
-{block content}{/block}
+{define title}{$project->getName()}{/define}
+
+
+{block content}
+
+{block |trim}{control commitsGrid}{/block}
+
+{/block}
