@@ -215,6 +215,24 @@ class Commit
 	}
 
 
+	public function getAdditions(): int
+	{
+		return $this->additions;
+	}
+
+
+	public function getDeletions(): int
+	{
+		return $this->deletions;
+	}
+
+	/** @return CommitFile[] */
+	public function getFiles(): array
+	{
+		return $this->files->toArray();
+	}
+
+
 	public function addFile(CommitFile $file): self
 	{
 		if (!$this->files->contains($file)) {

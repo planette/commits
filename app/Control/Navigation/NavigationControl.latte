@@ -14,5 +14,18 @@
 				GitHub
 			</a>
 		</li>
+
+		<li class="dropdown">
+			<a href="#n" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+				<i class="fas fa-fw fa-rss"></i>
+				RSS <span class="caret"></span>
+			</a>
+
+			<ul class="dropdown-menu" n:inner-foreach="$projects as $project">
+				<li>
+					<a href="{plink ProjectRss:feed, projectSlug => $project->getSlug()}">{$project->getName()}</a>
+				</li>
+			</ul>
+		</li>
 	</ul>
 </div>

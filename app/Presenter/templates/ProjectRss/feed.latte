@@ -1,0 +1,28 @@
+{templateType App\Presenter\ProjectRssTemplate}
+{layout none}
+{contentType application/rss+xml; charset=utf-8}
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>nette commits - {$project->getName()}</title>
+		<link>{link //:Project:commits, projectSlug => $project->getSlug()}</link>
+		<description>Latest {$project->getName()} commits</description>
+		<language>en</language>
+		<atom:link href="{link //this}" rel="self" type="application/rss+xml" />
+
+		<item n:foreach="$commits as $commit">
+			<title>[{$commit->getRepository()->getBasename()}] {$commit->getFirstMessageLine() |escapeRss|noescape} ({if $commit->hasAuthor()}{$commit->getAuthor()->getLogin()}{else}{$commit->getAuthorName()}{/if})</title>
+			<link>{$commit->getURL()}</link>
+			<description>{if $commit->hasMultilineMessage()}&lt;p&gt;{$commit->getOtherMessageLines() |trim|escapeRss|noescape}&lt;/p&gt;{/if}
+&lt;pre&gt;
+{foreach $commit->getFiles() as $file}{breakIf $iterations > 20}
+{$file->getFilename()} ({$file |changeStat}){sep}&lt;br&gt;{/sep}{/foreach}{if !$iterator->last && $iterations === 20}
+...{/if}
+{count($commit->getFiles())} {count($commit->getFiles()) |pluralize:'file':'files'} changed, {$commit->getAdditions()} {$commit->getAdditions() |pluralize:'insertion':'insertions'}(+), {$commit->getDeletions()} {$commit->getDeletions() |pluralize:'deletion':'deletions'}(-)
+&lt;/pre&gt;
+			</description>
+			<guid isPermaLink="false">{$commit->getRepository()->getName()}/{$commit->getSha()}</guid>
+			<pubDate>{$commit->getCommittedAt() |date:'D, d M Y H:i:s O'}</pubDate>
+		</item>
+	</channel>
+</rss>

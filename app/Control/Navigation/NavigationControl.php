@@ -30,4 +30,15 @@ final class NavigationControl extends Control
 		$template->render();
 	}
 
+
+	public function renderFeed(): void
+	{
+		/** @var NavigationTemplate $template */
+		$template = $this->createTemplate(NavigationTemplate::class);
+
+		$template->setFile(__DIR__ . '/NavigationControl.feed.latte');
+		$template->projects = $this->projectsQuery->get();
+		$template->render();
+	}
+
 }
