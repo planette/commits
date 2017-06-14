@@ -5,6 +5,30 @@
 
 {define container}
 
+	<div class="visible-xs">
+		<div class="media">
+			<div class="media-left media-middle">
+				<h2>
+					<a href="https://github.com/{$project->getFirstRepository()->getName()}"
+							title="{$project->getFirstRepository()->getName()}"
+							n:tag-if="!$project->hasMultipleRepositories()">
+						{$project->getName()}
+					</a>
+				</h2>
+			</div>
+
+			<div class="media-body text-right" n:snippet="filters-toggler">
+				<p>
+					<a href="#commits-header" class="btn btn-default" data-toggle="collapse">
+						<i class="fa fa-fw fa-bars"></i>
+						Filters
+						{if $grid->filters}({$grid->filters |length}){/if}
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+
 	<table class="table table-bordered table-striped table-hover table-condensed">
 		{include #header}
 		{include #body}
@@ -14,9 +38,23 @@
 {/define}
 
 
+{define header}
+
+	<thead class="header collapse" id="commits-header">
+		{include #header-sort-row}
+
+		{if $hasFilters}
+			{include #header-filter-row}
+		{/if}
+	</thead>
+
+{/define}
+
+
 {define filter-button}
 	<button n:name="$button" class="btn btn-default" title="{_$button->caption}">
 		<i n:class="fas, $name === filter ? fa-filter : fa-times"></i>
+		<span class="visible-xs-inline">{_$button->caption}</span>
 	</button>
 {/define}
 
@@ -27,13 +65,24 @@
 
 
 {define body-cell-author-content}
-	<div class="users">
+	<div class="users hidden-xs">
 		{include #user-avatar, user => $commit->getAuthor(), name => $commit->getAuthorName()}
 
 		<div class="committer" n:if=" $commit->hasCommitter() && $commit->hasDifferentAuthorAndCommitter()">
 			{include #user-avatar, user => $commit->getCommitter(), name => $commit->getCommitterName(), size => 12}
 		</div>
 	</div>
+
+	<span class="visible-xs-inline">
+		{include #time-ago, datetime => $commit->getCommittedAt()}
+		by
+		{if $commit->hasAuthor()}
+			<span title="{$commit->getAuthorName()}">{$commit->getAuthor()->getLogin()}</span>
+
+		{else}
+			{$commit->getAuthorName()}
+		{/if}
+	</span>
 {/define}
 
 
@@ -75,8 +124,13 @@
 
 
 {define body-cell-committed_at-content}
-	<time datetime="{$commit->getCommittedAt() |date:'Y-m-d H:i:sP'}" title="{$commit->getCommittedAt() |date:'Y-m-d H:i:s'}">
-		{$commit->getCommittedAt() |timeAgoInWords}
+	{include #time-ago, datetime => $commit->getCommittedAt()}
+{/define}
+
+
+{define time-ago}
+	<time datetime="{$datetime |date:'Y-m-d H:i:sP'}" title="{$datetime |date:'Y-m-d H:i:s'}">
+		{$datetime |timeAgoInWords}
 	</time>
 {/define}
 
@@ -94,10 +148,59 @@
 {/define}
 
 
+{define body-cell-row-actions}
+
+	<td class="body-cell row-actions">
+		{if $hasRowActions || $hasInlineEdit}
+			{include #row-actions, $recordVariable => $$recordVariable, isInlineEdited => $isInlineEdited, primaryString => $primaryString}
+
+		{else}
+			&nbsp;
+		{/if}
+	</td>
+
+{/define}
+
+
 {define row-action-browse_tree}
 	<a href="https://github.com/{$commit->getRepository()->getName()}/tree/{$commit->getSha()}"
 			class="btn btn-sm btn-default"
 			title="Browse the repository at this point in the history">
 		<i class="fas fa-code"></i>
+		<span class="visible-xs-inline">Browse</span>
 	</a>
+{/define}
+
+
+{define footer-info}
+
+	<div n:class="!$hasGroupActions && $grid->getPageCount() <= 1 ? col-md-12 : col-md-4, text-right, footer-info" n:if="$isPaginated">
+		{($grid->page - 1) * $grid->getItemsPerPage() + 1}-{min($grid->getItemCount(), ($grid->page - 1) * $grid->getItemsPerPage() + $grid->getItemsPerPage())}
+		/ {_'twigrid.pagination.total', $grid->getItemCount()}
+	</div>
+
+{/define}
+
+
+{define pagination}
+
+	{php $grid->addPaginationControls() }
+
+	<div class="col-md-4" n:if="!$hasGroupActions"></div>
+
+	<div class="col-md-4 tw-pagination text-center">
+		<a n:href="paginate!, p => max(1, $grid->page - 1)" n:class="btn, btn-default, $grid->page <= 1 ? disabled, tw-ajax">
+			<i class="fa fa-chevron-left"></i>
+		</a>
+
+		<div class="actual">
+			<input n:name="pagination-controls-page" class="form-control" style="width: {2 * 12 + 37 + 10 * (int) log10($grid->getPageCount())}px;"> / {$grid->getPageCount()}
+			<input n:name="pagination-buttons-change" class="js-hid btn btn-default">
+		</div>
+
+		<a n:href="paginate!, p => min($grid->getPageCount(), $grid->page + 1)" n:class="btn, btn-default, $grid->page === $grid->getPageCount() ? disabled, tw-ajax">
+			<i class="fa fa-chevron-right"></i>
+		</a>
+	</div>
+
 {/define}

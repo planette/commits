@@ -36,6 +36,18 @@ final class CommitsGrid extends DataGrid
 	}
 
 
+	protected function createTemplate(): CommitsGridTemplate
+	{
+		/** @var CommitsGridTemplate $template */
+		$template = parent::createTemplate(CommitsGridTemplate::class);
+
+		$template->project = $this->project;
+		$this->redrawControl('filters-toggler');
+
+		return $template;
+	}
+
+
 	protected function build(): void
 	{
 		$this->setPrimaryKey(['repository', 'sha']);
