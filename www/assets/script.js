@@ -20,7 +20,30 @@
 		$.nette.ext('clipboard', {
 			load: function () {
 				$('[data-clipboard-text]').each(function () {
-					new ClipboardJS(this);
+					var btn = $(this);
+					var origTitle = btn.attr('title');
+					var clipboard = new ClipboardJS(this);
+
+					clipboard.on('success', function (event) {
+						btn.attr('title', 'Copied!')
+							.tooltip('fixTitle')
+							.tooltip('show')
+							.attr('title', origTitle)
+							.tooltip('fixTitle');
+					});
+				});
+			}
+		});
+
+		// tooltips intentionally after clipboard since tooltips remove title
+		// attribute which is needed at clipboard instantiation
+		$.nette.ext('tooltips', {
+			load: function () {
+				$('.tooltip').remove();
+
+				$('[title]').tooltip({
+					animation: false,
+					container: 'body'
 				});
 			}
 		});

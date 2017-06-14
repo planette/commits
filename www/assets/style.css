@@ -25,6 +25,12 @@ h2
 }
 
 
+.tooltip-inner
+{
+	max-width: 290px;
+}
+
+
 .tw-cnt .header
 {
 	display: table-header-group;
