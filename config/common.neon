@@ -15,6 +15,7 @@ search:
 	in: %appDir%
 	exclude:
 		classes:
+			- App\Form\**
 			- App\Bootstrap
 			- App\Entity\**
 			- App\Control\**
