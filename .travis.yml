@@ -1,0 +1,47 @@
+language: php
+
+php:
+    - 7.4
+
+stages:
+    - Code Checks
+    - test
+
+before_install: mv tests/local.travis.neon config/local.neon
+
+install: composer install --no-interaction --prefer-source
+
+script: composer tester
+
+after_failure:
+    - 'for i in $(find tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done'
+
+jobs:
+    include:
+        -   stage: Code Checks
+            name: PHP Lint
+            php: 7.4
+            before_install: ~
+            script: composer phplint
+            after_failure: ~
+
+        -   stage: Code Checks
+            name: Static Analysis
+            php: 7.4
+            before_install: ~
+            script: composer phpstan
+            after_failure: ~
+
+        -   stage: Code Checks
+            name: Code Checker
+            php: 7.4
+            before_install: ~
+            script: composer code-checker
+            after_failure: ~
+
+        -   stage: Code Checks
+            name: Coding Standards
+            php: 7.4
+            before_install: ~
+            script: composer coding-standards
+            after_failure: ~

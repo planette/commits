@@ -1,0 +1,84 @@
+<?xml version="1.0" ?>
+<ruleset name="nette-commits">
+	<arg name="colors" />
+	<arg name="tab-width" value="4" />
+	<arg name="parallel" value="4" />
+	<arg name="extensions" value="php" />
+
+	<file>app/</file>
+	<file>tests/</file>
+	<file>www/</file>
+
+	<rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma" />
+	<rule ref="SlevomatCodingStandard.Arrays.DisallowImplicitArrayCreation" />
+
+	<rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility" />
+	<rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants" />
+	<rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference" />
+	<rule ref="SlevomatCodingStandard.Classes.TraitUseDeclaration" />
+
+	<rule ref="SlevomatCodingStandard.Classes.UselessLateStaticBinding" />
+
+	<rule ref="SlevomatCodingStandard.Commenting.EmptyComment" />
+	<rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration" />
+	<rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment" />
+	<rule ref="SlevomatCodingStandard.Commenting.UselessInheritDocComment" />
+
+	<rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.DisallowContinueWithoutIntegerOperandInSwitch" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.DisallowEmpty" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.LanguageConstructWithParentheses" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses" />
+	<rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator" />
+
+	<rule ref="SlevomatCodingStandard.Exceptions.DeadCatch" />
+	<rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly" />
+
+	<rule ref="SlevomatCodingStandard.Functions.StaticClosure" />
+	<rule ref="SlevomatCodingStandard.Functions.UnusedInheritedVariablePassedToClosure" />
+	<rule ref="SlevomatCodingStandard.Functions.UselessParameterDefaultValue" />
+
+	<rule ref="SlevomatCodingStandard.Operators.DisallowEqualOperators" />
+
+	<rule ref="SlevomatCodingStandard.Namespaces.UnusedUses">
+		<properties>
+			<property name="searchAnnotations" value="true" />
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse" />
+	<rule ref="SlevomatCodingStandard.Namespaces.MultipleUsesPerLine" />
+	<rule ref="SlevomatCodingStandard.Namespaces.NamespaceDeclaration" />
+	<rule ref="SlevomatCodingStandard.Namespaces.RequireOneNamespaceInFile" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseDoesNotStartWithBackslash" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UseFromSameNamespace" />
+	<rule ref="SlevomatCodingStandard.Namespaces.UselessAlias" />
+
+	<rule ref="SlevomatCodingStandard.PHP.OptimizedFunctionsWithoutUnpacking" />
+	<rule ref="SlevomatCodingStandard.PHP.ShortList" />
+	<rule ref="SlevomatCodingStandard.PHP.TypeCast" />
+	<rule ref="SlevomatCodingStandard.PHP.UselessParentheses" />
+	<rule ref="SlevomatCodingStandard.PHP.UselessSemicolon" />
+
+	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+		<properties>
+			<property name="newlinesCountAfterDeclare" value="2" />
+			<property name="spacesCountAroundEqualsSign" value="1" />
+			<property name="newlinesCountBetweenOpenTagAndDeclare" value="2" />
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints" />
+	<rule ref="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue" />
+	<rule ref="SlevomatCodingStandard.TypeHints.NullTypeHintOnLastPosition" />
+	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHintSpacing" />
+	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint" />
+	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint" />
+	<rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHintSpacing" />
+	<rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint" />
+
+	<rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable" />
+	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable" />
+	<rule ref="SlevomatCodingStandard.Variables.UselessVariable" />
+</ruleset>

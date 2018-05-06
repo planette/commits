@@ -1,0 +1,7 @@
+parameters:
+	level: max
+	paths:
+		- app/
+		- www/
+		- tests/
+	tmpDir: var/temp

@@ -29,9 +29,35 @@
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
 	},
+	"require-dev": {
+		"php-parallel-lint/php-parallel-lint": "^1.2",
+		"php-parallel-lint/php-console-highlighter": "^0.5",
+		"nette/code-checker": "^3.2",
+		"nette/tester": "^2.4",
+		"phpstan/phpstan": "^0.12",
+		"phpstan/extension-installer": "^1.1",
+		"phpstan/phpstan-strict-rules": "^0.12",
+		"phpstan/phpstan-deprecation-rules": "^0.12",
+		"phpstan/phpstan-nette": "^0.12",
+		"slevomat/coding-standard": "^7.0"
+	},
 	"autoload-dev": {
 		"files": [
 			"app/functions.php"
 		]
+	},
+	"scripts": {
+		"ci": [
+			"@phplint",
+			"@phpstan",
+			"@code-checker",
+			"@coding-standards",
+			"@tester"
+		],
+		"phplint": "parallel-lint --colors app/ tests/ www/",
+		"phpstan": "phpstan analyse",
+		"code-checker": "code-checker --eol --fix --strict-types -d app/ -d tests/ -d www/",
+		"coding-standards": "phpcs --standard=phpcs.xml",
+		"tester": "tester -j 8 -C --colors 1 --log var/log/tests.log --temp var/temp tests/"
 	}
 }
