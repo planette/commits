@@ -1,3 +1,7 @@
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension( %consoleMode% )
+
+
 search:
 	in: %appDir%
 	exclude:
@@ -5,6 +9,10 @@ search:
 			- App\Bootstrap
 			- App\Entity\**
 			- App\Router\RouterFactory
+
+
+console:
+	url: https://commits.nette.org
 
 
 application:
