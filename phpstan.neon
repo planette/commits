@@ -4,4 +4,6 @@ parameters:
 		- app/
 		- www/
 		- tests/
+	doctrine:
+		objectManagerLoader: tests/object-manager.php
 	tmpDir: var/temp

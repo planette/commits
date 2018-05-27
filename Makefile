@@ -1,9 +1,10 @@
-.PHONY: install ci phplint phpstan code-checker coding-standards tester
+.PHONY: install ci phplint phpstan code-checker coding-standards schema tester
 
 install:
 	composer update
+	php bin/console orm:schema-tool:create
 
-ci: phplint phpstan code-checker coding-standards tester
+ci: phplint phpstan code-checker coding-standards schema tester
 
 phplint:
 	composer phplint
@@ -16,6 +17,9 @@ code-checker:
 
 coding-standards:
 	composer coding-standards
+
+schema:
+	composer schema
 
 tester:
 	composer tester

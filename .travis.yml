@@ -7,6 +7,8 @@ stages:
     - Code Checks
     - test
 
+services: mysql
+
 before_install: mv tests/local.travis.neon config/local.neon
 
 install: composer install --no-interaction --prefer-source
@@ -28,7 +30,6 @@ jobs:
         -   stage: Code Checks
             name: Static Analysis
             php: 7.4
-            before_install: ~
             script: composer phpstan
             after_failure: ~
 

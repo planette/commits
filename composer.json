@@ -25,7 +25,8 @@
 		"nette/utils": "^3.2",
 		"latte/latte": "^2.10",
 		"tracy/tracy": "^2.8",
-		"contributte/console": "^0.9"
+		"contributte/console": "^0.9",
+		"nettrine/orm": "^0.8"
 	},
 	"autoload": {
 		"classmap": ["app/Bootstrap.php"]
@@ -40,6 +41,7 @@
 		"phpstan/phpstan-strict-rules": "^0.12",
 		"phpstan/phpstan-deprecation-rules": "^0.12",
 		"phpstan/phpstan-nette": "^0.12",
+		"phpstan/phpstan-doctrine": "^0.12.33",
 		"slevomat/coding-standard": "^7.0"
 	},
 	"autoload-dev": {
@@ -53,12 +55,17 @@
 			"@phpstan",
 			"@code-checker",
 			"@coding-standards",
+			"@schema",
 			"@tester"
 		],
 		"phplint": "parallel-lint --colors app/ tests/ www/",
 		"phpstan": "phpstan analyse",
 		"code-checker": "code-checker --eol --fix --strict-types -d app/ -d tests/ -d www/",
 		"coding-standards": "phpcs --standard=phpcs.xml",
+		"schema": [
+			"rm -rf var/temp/cache",
+			"@php bin/console orm:validate-schema --skip-sync"
+		],
 		"tester": "tester -j 8 -C --colors 1 --log var/log/tests.log --temp var/temp tests/"
 	}
 }
