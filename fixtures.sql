@@ -24,6 +24,7 @@ INSERT IGNORE INTO `repository` (`id`, `name`, `project_id`) VALUES
 ('98264ca6',	'nette/http',	'b82r4gf7'),
 ('98264d0b',	'nette/latte',	'b82r4gf7'),
 ('98264d68',	'nette/mail',	'b82r4gf7'),
+('98264dcc',	'nette/middleware',	'b82r4gf7'),
 ('98264e3a',	'nette/neon',	'b82r4gf7'),
 ('98264ea4',	'nette/nette',	'b82r4gf7'),
 ('98264f09',	'nette/php-generator',	'b82r4gf7'),
