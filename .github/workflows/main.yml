@@ -1,0 +1,35 @@
+name: "build"
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4']
+
+      fail-fast: false
+
+    services:
+      mysql:
+        image: mariadb:latest
+        env:
+          MYSQL_DATABASE: test
+          MYSQL_ROOT_PASSWORD: password
+        options: --health-cmd="mysqladmin ping" --health-interval=5s --health-timeout=2s --health-retries=3
+        ports:
+          - 3306:3306
+
+    name: PHP ${{ matrix.php }} Tests
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: json, mbstring, xml, tokenizer
+          coverage: none
+
+      - run: mv tests/local.ci.neon config/local.neon
+      - run: make install
+      - run: make ci
